@@ -147,7 +147,7 @@ public class TestPiece {
         assertEquals(Colors.WHITE, b1.getPlayer().getColor());
 
         assertEquals(5, b1.getAllMoves().size());
-
+//loooooooooooooooooooool
 
     }
     
