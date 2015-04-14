@@ -44,7 +44,7 @@ public class BishopBehavior extends LongRangePieceBehavior
         list.addAll(getMovesForDirection(DIRECTION_LEFT,   DIRECTION_BOTTOM)); //left-down
         list.addAll(getMovesForDirection(DIRECTION_RIGHT,  DIRECTION_UP)); //right-up
         list.addAll(getMovesForDirection(DIRECTION_RIGHT,  DIRECTION_BOTTOM)); //right-down
-        
+        //ici
         return list;
     }
     
