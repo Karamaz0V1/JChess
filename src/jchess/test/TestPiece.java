@@ -9,6 +9,7 @@ import jchess.core.moves.Moves;
 import jchess.core.pieces.Piece;
 import jchess.core.pieces.implementation.Bishop;
 import jchess.core.pieces.implementation.King;
+import jchess.core.pieces.implementation.Knight;
 import jchess.core.pieces.implementation.Pawn;
 import jchess.utils.Settings;
 import org.jdesktop.application.SingleFrameApplication;
@@ -62,6 +63,7 @@ public class TestPiece {
         // #3 bad API design
         // assertNotNull(board.getMoves());
     }
+    
 
     @Test
     public void testBasicMovement() throws Exception {
@@ -148,4 +150,14 @@ public class TestPiece {
 
 
     }
+    
+    @Test
+    public void testKnight() throws Exception {
+    	Piece k1 = board.getSquare(6, 7).getPiece();
+    	assertTrue(k1 instanceof Knight);
+    	assertEquals(Colors.WHITE, k1.getPlayer().getColor());
+    	
+    	assertEquals(1, k1.getAllMoves().size());
+    }
+
 }
