@@ -20,14 +20,17 @@ package jchess.core;
 
 import jchess.core.pieces.implementation.King;
 import jchess.core.pieces.implementation.Knight;
+import jchess.core.pieces.implementation.Ninja;
 import jchess.core.pieces.implementation.Queen;
 import jchess.core.pieces.implementation.Rook;
 import jchess.core.pieces.implementation.Pawn;
 import jchess.core.pieces.implementation.Bishop;
 import jchess.core.pieces.Piece;
+
 import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 import java.util.Set;
+
 import jchess.JChessApp;
 import jchess.core.moves.Castling;
 import jchess.core.moves.Move;
@@ -35,6 +38,7 @@ import jchess.core.moves.Moves;
 import jchess.display.views.chessboard.implementation.graphic2D.Chessboard2D;
 import jchess.display.views.chessboard.ChessboardView;
 import jchess.utils.Settings;
+
 import org.apache.log4j.*;
 
 /** 
@@ -207,10 +211,11 @@ public class Chessboard
             LOG.error("error setting pawns etc.");
             return;
         }
-        for (int x = 0; x < 8; x++)
+        for (int x = 0; x < 7; x++)
         {
             this.getSquare(x, i).setPiece(new Pawn(this, player));
         }
+        this.getSquare(7,i).setPiece(new Ninja(this, player));
     }
     
     /** Method selecting piece in chessboard
