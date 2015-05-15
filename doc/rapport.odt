@@ -1,0 +1,63 @@
+﻿Projet MDI
+Jeux d'échecs & Design patterns
+Table des matières
+Introduction	1
+Au commencement	1
+Diagramme de classe UML de l'application d'origine	1
+Identification des designs patterns déjà présents	2
+Design pattern d'interface	2
+Behavior	3
+Singleton	5
+Rôle des entités	5
+Nettoyage	6
+Lancer une partie au chargement	6
+Temps de la partie	6
+Décompte du temps	6
+Correction de bug	6
+Moniteur pour la lisibilité	6
+Variantes	6
+En visite	6
+Décoration	6
+AI	6
+Conclusion	6
+
+Introduction
+Le but de ce projet est de modifier un programme d'échecs déjà existant afin de le corriger et en réécrire une partie en s'inspirant des patrons de conception. Les patrons de conception (design pattern en anglais)  est un arrangement caractéristique de modules, reconnu comme bonne pratique en réponse à un problème de conception d’un logiciel.
+Le logiciel en question est « Java Open Chess » modifié pour l'occasion. Il présente de nombreux bugs et des comportements inattendus. Dans un premier temps, nous allons analyser le fonctionnement actuel du logiciel puis nous allons corriger les bugs critique et essayer de l'améliorer. 
+Au commencement
+Diagramme de classe UML de l'application d'origine
+[insert diagramme UML here]
+Identification des designs patterns déjà présents
+Design pattern d'interface
+
+L'application se sépare dans 3 groupes de classe distinct.
+       
+                                  
+Utils contient les données relatives à la partie, les réglages.
+Core contient le cœur du programme, la gestion de l'échiquier, des mouvements, de l'horloge. Tandis que Display contient tout le code relatif à l'affichage. 
+Le design pattern observer est utilisé pour communiquer entre chacune de ces groupes, notamment pour affranchir l'affichage quand l'échiquier subit un changement.
+Cette organisation rappelle le patron de conception Modèle Vue Controller qui propose de séparer le code en 3
+partie, dont la vue (ici Display), le controller (Core) et le modèle qui contient toute les données de l'application (utils contient une partie des données seulement, mais se rapproche d'un modèle).
+La mise à jour de l'interface se fait justement par observer, (la vue <<observe>> le modèle pour surveiller les mises à jour du modèle par le contrôleur.)
+Behavior
+
+Les pièces possèdent différents comportements. Ces comportements sont implémentés suivant le patron de conception template. 
+Le template method permet de définir précisement le comportement pour les pièces. En effet, ces pièces implémentent un comportement (Behavior) qui est abstrait. Les classes concrètes contenant les vrais déplacements (différents les uns des autres) étendent Behavior en héritant de cette classe. Ainsi quand chaque pièce cherche à connaitre ses cases dans sa portée, la réponse donnée par la classe qui lui correspond.
+Ce design est aussi utilisé pour donner des particularités à certaine pièces. Le roi possède en plus des déplacements et autres méthodes communes, des méthodes pour vérifier s'il est en lieu sûr etc...
+Singleton
+
+Le singleton est un patron de conception qui permet d'assurer que une seule instance d'une classe pourra être instanciée. Ce pattern est utilisé dans ce projet par JChessApp et JChessView.
+Ces deux classes ont en attribut statique une instance d'eux même. Lors de la construction de ces classes, l'attribut est vérifié, s'il est null, la classe instanciée. On peut récupérer les instances en appelant nimporte quand 'getApplication()'.
+Rôle des entités
+[insert bullshit here]
+Nettoyage
+Lancer une partie au chargement
+Temps de la partie
+Décompte du temps
+Correction de bug
+Moniteur pour la lisibilité
+Variantes
+En visite
+Décoration
+AI
+Conclusion
