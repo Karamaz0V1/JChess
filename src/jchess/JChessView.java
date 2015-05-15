@@ -16,27 +16,30 @@
 package jchess;
 
 import jchess.core.Game;
+import jchess.core.Player;
+
 import org.jdesktop.application.Action;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
 import org.jdesktop.application.FrameView;
 import org.jdesktop.application.TaskMonitor;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.Timer;
-import javax.swing.Icon;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
+
 import javax.swing.*;
+
 import java.awt.event.*;
 import java.io.File;
 import java.applet.*;
 import java.io.IOException;
+
 import jchess.utils.GUI;
 import jchess.utils.Settings;
 import jchess.display.windows.JChessAboutBox;
 import jchess.display.windows.PawnPromotionWindow;
 import jchess.display.windows.ThemeChooseWindow;
+
 import org.apache.log4j.Logger;
 
 
@@ -221,10 +224,44 @@ public class JChessView extends FrameView implements ActionListener, ComponentLi
                 }
             }
         });
+        String whiteID = getWhiteId() ;
+        String blackID = getBlackId() ;
         
+        Game newGUI = this.addNewTab(whiteID + " vs " + blackID); 
+        Settings sett = newGUI.getSettings();//sett local settings variable
+                
+        Player playerBlack = sett.getPlayerBlack();
+        Player playerWhite = sett.getPlayerWhite();
+        
+        playerBlack.setName(blackID);
+        playerWhite.setName(whiteID);
+        
+        playerBlack.setType(Player.playerTypes.localUser);
+        playerWhite.setType(Player.playerTypes.localUser);
+        
+        sett.setGameMode(Settings.gameModes.newGame) ;
+        sett.setGameType(Settings.gameTypes.local);
+        
+        sett.setUpsideDown(false);
+        
+        setLastTabAsActive();
+
+        newGUI.newGame();
+        
+        newGUI.getChessboard().repaint();
     }
 
-    @Action
+    private String getBlackId() {
+		String id="";
+		return id+"_Black";
+	}
+
+	private String getWhiteId() {
+		String id="";
+		return id+"_White";
+	}
+
+	@Action
     public void showAboutBox() {
         if (aboutBox == null) {
             JFrame mainFrame = JChessApp.getApplication().getMainFrame();

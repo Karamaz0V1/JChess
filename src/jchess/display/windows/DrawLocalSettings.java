@@ -150,7 +150,8 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
             sett.setGameMode(Settings.gameModes.newGame);
             //if(this.firstName.getText().length() >9 ) this.firstName.setText(this.firstName.getText(0,8));
             //TODO: investigate and refactor
-            if (this.color.getActionCommand().equals("biały")) //if first player is white
+            System.out.println(this.color.getSelectedItem());
+            if (this.color.getSelectedItem().equals("White")) //if first player is white
             {
                 pl1.setName(this.firstName.getText());//set name of player
                 pl2.setName(this.secondName.getText());//set name of player
@@ -174,7 +175,7 @@ public class DrawLocalSettings extends JPanel implements ActionListener, TextLis
                 Integer val = new Integer(value);
                 sett.setTimeForGame((int) val * 60);//set time for game and mult it to seconds
                 newGUI.getGameClock().setTimes(sett.getTimeForGame(), sett.getTimeForGame());
-                newGUI.getGameClock().start();
+                //newGUI.getGameClock().start();
             }
             LOG.debug("this.time4Game.getActionCommand(): " + this.time4Game.getActionCommand());
             //this.time4Game.getComponent(this.time4Game.getSelectedIndex());

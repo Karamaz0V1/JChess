@@ -16,10 +16,13 @@
 package jchess.core;
 
 import jchess.core.pieces.implementation.King;
+
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 import javax.swing.*;
+
 import java.awt.*;
 import java.io.File;
 import java.io.BufferedReader;
@@ -28,9 +31,13 @@ import java.io.FileReader;
 import java.util.Calendar;
 import java.awt.event.ComponentListener;
 import java.awt.event.WindowEvent;
+
 import org.apache.log4j.Logger;
+
 import java.io.IOException;
+
 import jchess.JChessApp;
+import jchess.JChessView;
 import jchess.core.moves.Moves;
 import jchess.display.panels.LocalSettingsView;
 import jchess.display.views.chessboard.ChessboardView;
@@ -294,7 +301,11 @@ public class Game extends JPanel implements ComponentListener, MouseListener
         }
         //dirty hacks starts over here :) 
         //to fix rendering artefacts on first run
-        Game activeGame = JChessApp.getJavaChessView().getActiveTabGame();
+        JChessView view = JChessApp.getJavaChessView();
+        Game game = null;
+        if(view != null)
+        	game= view.getActiveTabGame();
+        Game activeGame = game;
         if (null != activeGame) {
             Chessboard chessboard = activeGame.getChessboard();
             ChessboardView chessboardView = chessboard.getChessboardView();
@@ -317,6 +328,7 @@ public class Game extends JPanel implements ComponentListener, MouseListener
     {
         this.blockedChessboard = true;
         LOG.debug(message);
+        getGameClock().stop();
         JOptionPane.showMessageDialog(null, message);
     }
 
@@ -349,7 +361,8 @@ public class Game extends JPanel implements ComponentListener, MouseListener
     public void nextMove()
     {
         switchActive();
-
+        if(getMoves().getMoves().size()==1)
+        	getGameClock().start();
         LOG.debug("next move, active player: " + activePlayer.getName() + 
                   ", color: " + activePlayer.getColor().name() + 
                   ", type: " + activePlayer.getPlayerType().name()

@@ -52,7 +52,7 @@ public class PawnPromotionWindow extends JDialog implements ActionListener
         this.setMaximumSize(new Dimension(520, 130));
         this.setResizable(false);
         this.setLayout(new GridLayout(1, 4));
-        //this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        //this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 
         this.gbl = new GridBagLayout();
         this.gbc = new GridBagConstraints();
@@ -71,6 +71,8 @@ public class PawnPromotionWindow extends JDialog implements ActionListener
         this.add(rookButton);
         this.add(bishopButton);
         this.add(knightButton);
+        
+        this.setVisible(true);
     }
 
     /** Method setting the color fo promoted pawn
