@@ -362,7 +362,8 @@ public class Game extends JPanel implements ComponentListener, MouseListener
     {
         switchActive();
         if(getMoves().getMoves().size()==1)
-        	getGameClock().start();
+        	if(getGameClock().clock1.getLeftTime()>0)
+        		getGameClock().start();
         LOG.debug("next move, active player: " + activePlayer.getName() + 
                   ", color: " + activePlayer.getColor().name() + 
                   ", type: " + activePlayer.getPlayerType().name()
